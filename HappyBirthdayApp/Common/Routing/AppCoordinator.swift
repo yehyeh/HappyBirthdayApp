@@ -17,6 +17,16 @@ class AppCoordinator: NSObject {
         let presenter = InputPresenter()
         let vc = InputViewController(presenter: presenter)
         presenter.view = vc
+        presenter.persistanceService = UserDefaultsPersistance()
+        presenter.coordinatorDelegate = self
+        return vc
+    }()
+
+    private lazy var birthdayScreen: BirthdayViewController = {
+        let presenter = BirthdayPresenter()
+        let vc = BirthdayViewController(presenter: presenter)
+        presenter.view = vc
+        presenter.persistanceService = UserDefaultsPersistance()
         presenter.coordinatorDelegate = self
         return vc
     }()
@@ -26,14 +36,6 @@ class AppCoordinator: NSObject {
         self.rootViewController = UINavigationController()
         self.rootViewController.navigationBar.prefersLargeTitles = true
         window.rootViewController = rootViewController
-    }
-
-    private func showBirthdayScreen() {
-        let presenter = BirthdayPresenter()
-        let vc = BirthdayViewController(presenter: presenter)
-        presenter.view = vc
-        presenter.coordinatorDelegate = self
-        rootViewController.pushViewController(vc, animated: true)
     }
 }
 
@@ -45,7 +47,7 @@ extension AppCoordinator: Coordinator {
 
 extension AppCoordinator: InputCoordinatorDelegate {
     func showBirthday(with data: any BabyData) {
-        showBirthdayScreen()
+        rootViewController.pushViewController(birthdayScreen, animated: true)
     }
 }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InputViewController: UIViewController, InputViewProtocol {
+class InputViewController: UIViewController{
     private var presenter: InputPresenterProtocol!
 
     enum Const {
@@ -89,11 +89,24 @@ class InputViewController: UIViewController, InputViewProtocol {
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
+        presenter.onViewDidLoad()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         avatarImageView.layer.cornerRadius = min(avatarImageView.bounds.width, avatarImageView.bounds.height) / 2
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: nameTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidEndEditing), name: UITextView.textDidEndEditingNotification, object: nameTextField)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UITextView.textDidEndEditingNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UITextView.textDidChangeNotification, object: nil)
     }
 
     // MARK: - Handlers
@@ -116,17 +129,54 @@ class InputViewController: UIViewController, InputViewProtocol {
     }
 }
 
+extension InputViewController: InputViewProtocol {
+    func update(baby: any BabyData) {
+        nameTextField.text = baby.name
+        
+        if let birthDate = baby.birthDate {
+            birthdatePicker.date = birthDate
+        }
+
+        updateImage(image: baby.image)
+
+        updateButtonState()
+    }
+    
+    func updateImage(image: UIImage?) {
+        guard let image = image else { return }
+        avatarImageView.image = image
+    }
+}
+
 extension InputViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = textField.text else { return true }
-        if text.trimmingCharacters(in: .whitespaces).count > 0 {
-            self.view.endEditing(true)
-        }
+        presenter.handleNameChanged(name: text)
+        view.endEditing(true)
         return false
+    }
+    
+    // MARK: - Observer handlers
+    @objc func textDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        presenter.handleNameChanged(name: text)
+    }
+
+    @objc func textDidChange() {
+        updateButtonState()
     }
 }
 
 private extension InputViewController {
+    func isNonEmpty(name: String) -> Bool {
+        name.trimmingCharacters(in: .whitespaces).count > 0
+    }
+
+    func updateButtonState() {
+        let isEnabled = isNonEmpty(name: nameTextField.text ?? "")
+        nextScreenButton.isEnabled = isEnabled //YY_TODO: not disabling accordingly
+    }
+
     func setupViews() {
         view.addSubview(stackView)
         stackView.addArrangedSubview(nameTextField)

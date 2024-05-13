@@ -19,6 +19,7 @@
 		0DD04D162BF23CA8008B0F1F /* BirthdayPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D152BF23CA8008B0F1F /* BirthdayPresenter.swift */; };
 		0DD04D1A2BF24F24008B0F1F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D192BF24F24008B0F1F /* Coordinator.swift */; };
 		0DD04D1C2BF24F43008B0F1F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D1B2BF24F43008B0F1F /* AppCoordinator.swift */; };
+		0DD04D212BF2BDBC008B0F1F /* UserDefaultsPersistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D202BF2BDBC008B0F1F /* UserDefaultsPersistance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		0DD04D152BF23CA8008B0F1F /* BirthdayPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayPresenter.swift; sourceTree = "<group>"; };
 		0DD04D192BF24F24008B0F1F /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0DD04D1B2BF24F43008B0F1F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		0DD04D202BF2BDBC008B0F1F /* UserDefaultsPersistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		0DD04D0A2BF2351E008B0F1F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0DD04D1F2BF2BDAE008B0F1F /* Persistance */,
 				0DD04D172BF24EAA008B0F1F /* Routing */,
 				0DD04D0D2BF238E2008B0F1F /* Model */,
 				0DD04D082BF234CD008B0F1F /* Assets */,
@@ -163,6 +166,14 @@
 				0DD04D192BF24F24008B0F1F /* Coordinator.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		0DD04D1F2BF2BDAE008B0F1F /* Persistance */ = {
+			isa = PBXGroup;
+			children = (
+				0DD04D202BF2BDBC008B0F1F /* UserDefaultsPersistance.swift */,
+			);
+			path = Persistance;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +249,7 @@
 			files = (
 				0DD04D1A2BF24F24008B0F1F /* Coordinator.swift in Sources */,
 				0DD04CF62BF23069008B0F1F /* InputViewController.swift in Sources */,
+				0DD04D212BF2BDBC008B0F1F /* UserDefaultsPersistance.swift in Sources */,
 				0DD04CF22BF23069008B0F1F /* AppDelegate.swift in Sources */,
 				0DD04D0F2BF238F2008B0F1F /* BabyData.swift in Sources */,
 				0DD04CF42BF23069008B0F1F /* SceneDelegate.swift in Sources */,

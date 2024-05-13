@@ -8,7 +8,7 @@
 import UIKit
 
 protocol BirthdayPresenterProtocol {
-    func handleImageSelection(image: UIImage?)
+    func handleImageSelection(image: UIImage)
     func dismiss()
 }
 
@@ -23,8 +23,9 @@ protocol BirthdayCoordinatorDelegate: AnyObject {
 class BirthdayPresenter: BirthdayPresenterProtocol {
     weak var view: BirthdayViewProtocol?
     weak var coordinatorDelegate: BirthdayCoordinatorDelegate?
+    var persistanceService: PersistanceProtocol!
 
-    func handleImageSelection(image: UIImage?) {
+    func handleImageSelection(image: UIImage) {
 
     }
 

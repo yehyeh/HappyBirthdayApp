@@ -9,12 +9,12 @@ import UIKit
 
 protocol BabyData {
     var name: String { get set }
-    var birthDate: Date { get set }
+    var birthDate: Date? { get set }
     var image: UIImage? { get set }
 }
 
-class Baby: BabyData {
+struct Baby: BabyData {
     var name: String = ""
-    var birthDate: Date = Date()
+    var birthDate: Date? = nil
     var image: UIImage? = nil
 }
