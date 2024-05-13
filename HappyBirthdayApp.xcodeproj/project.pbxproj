@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0DD04CF22BF23069008B0F1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04CF12BF23069008B0F1F /* AppDelegate.swift */; };
 		0DD04CF42BF23069008B0F1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04CF32BF23069008B0F1F /* SceneDelegate.swift */; };
-		0DD04CF62BF23069008B0F1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04CF52BF23069008B0F1F /* ViewController.swift */; };
+		0DD04CF62BF23069008B0F1F /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04CF52BF23069008B0F1F /* InputViewController.swift */; };
 		0DD04CFB2BF2306B008B0F1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DD04CFA2BF2306B008B0F1F /* Assets.xcassets */; };
 		0DD04CFE2BF2306B008B0F1F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 0DD04CFD2BF2306B008B0F1F /* Base */; };
 /* End PBXBuildFile section */
@@ -18,7 +18,7 @@
 		0DD04CEE2BF23069008B0F1F /* HappyBirthdayApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyBirthdayApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DD04CF12BF23069008B0F1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DD04CF32BF23069008B0F1F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0DD04CF52BF23069008B0F1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0DD04CF52BF23069008B0F1F /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		0DD04CFA2BF2306B008B0F1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0DD04CFD2BF2306B008B0F1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0DD04CFF2BF2306B008B0F1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,14 +54,62 @@
 		0DD04CF02BF23069008B0F1F /* HappyBirthdayApp */ = {
 			isa = PBXGroup;
 			children = (
-				0DD04CF12BF23069008B0F1F /* AppDelegate.swift */,
-				0DD04CF32BF23069008B0F1F /* SceneDelegate.swift */,
-				0DD04CF52BF23069008B0F1F /* ViewController.swift */,
-				0DD04CFA2BF2306B008B0F1F /* Assets.xcassets */,
-				0DD04CFC2BF2306B008B0F1F /* LaunchScreen.storyboard */,
-				0DD04CFF2BF2306B008B0F1F /* Info.plist */,
+				0DD04D062BF23482008B0F1F /* Modules */,
+				0DD04D0A2BF2351E008B0F1F /* Common */,
+				0DD04D052BF23456008B0F1F /* App */,
 			);
 			path = HappyBirthdayApp;
+			sourceTree = "<group>";
+		};
+		0DD04D052BF23456008B0F1F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0DD04D092BF234DD008B0F1F /* Launch */,
+				0DD04CFF2BF2306B008B0F1F /* Info.plist */,
+				0DD04CF12BF23069008B0F1F /* AppDelegate.swift */,
+				0DD04CF32BF23069008B0F1F /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		0DD04D062BF23482008B0F1F /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				0DD04D072BF2348F008B0F1F /* Input Screen */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		0DD04D072BF2348F008B0F1F /* Input Screen */ = {
+			isa = PBXGroup;
+			children = (
+				0DD04CF52BF23069008B0F1F /* InputViewController.swift */,
+			);
+			path = "Input Screen";
+			sourceTree = "<group>";
+		};
+		0DD04D082BF234CD008B0F1F /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0DD04CFA2BF2306B008B0F1F /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		0DD04D092BF234DD008B0F1F /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				0DD04CFC2BF2306B008B0F1F /* LaunchScreen.storyboard */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		0DD04D0A2BF2351E008B0F1F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0DD04D082BF234CD008B0F1F /* Assets */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,7 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DD04CF62BF23069008B0F1F /* ViewController.swift in Sources */,
+				0DD04CF62BF23069008B0F1F /* InputViewController.swift in Sources */,
 				0DD04CF22BF23069008B0F1F /* AppDelegate.swift in Sources */,
 				0DD04CF42BF23069008B0F1F /* SceneDelegate.swift in Sources */,
 			);
@@ -282,7 +330,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9HLG8CJVW2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HappyBirthdayApp/Info.plist;
+				INFOPLIST_FILE = HappyBirthdayApp/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Birthdaying;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -312,7 +360,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9HLG8CJVW2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HappyBirthdayApp/Info.plist;
+				INFOPLIST_FILE = HappyBirthdayApp/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Birthdaying;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
