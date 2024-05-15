@@ -98,6 +98,11 @@ class InputViewController: UIViewController{
         avatarImageView.layer.cornerRadius = min(avatarImageView.bounds.width, avatarImageView.bounds.height) / 2
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.onViewWillAppear()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextField.textDidChangeNotification, object: nameTextField)
@@ -126,6 +131,7 @@ class InputViewController: UIViewController{
     }
 
     @objc private func showBirthdayButtonTapped() {
+        presenter.handleBirthDateChanged(date: birthdatePicker.date)// TODO: detect and trigger earlier
         presenter.handleShowBirthdayTap()
     }
 }
@@ -152,7 +158,6 @@ extension InputViewController: InputViewProtocol {
         let isEnabled = isNonEmpty(name: nameTextField.text ?? "")
         nextScreenButton.isEnabled = isEnabled
     }
-
 }
 
 extension InputViewController: UITextFieldDelegate {

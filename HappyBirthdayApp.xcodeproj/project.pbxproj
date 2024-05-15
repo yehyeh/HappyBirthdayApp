@@ -20,6 +20,9 @@
 		0DD04D1A2BF24F24008B0F1F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D192BF24F24008B0F1F /* Coordinator.swift */; };
 		0DD04D1C2BF24F43008B0F1F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D1B2BF24F43008B0F1F /* AppCoordinator.swift */; };
 		0DD04D212BF2BDBC008B0F1F /* UserDefaultsPersistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D202BF2BDBC008B0F1F /* UserDefaultsPersistance.swift */; };
+		0DD04D232BF49DBC008B0F1F /* PhotoPickerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D222BF49DBC008B0F1F /* PhotoPickerWrapper.swift */; };
+		0DD04D262BF52B67008B0F1F /* BirthdayTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D252BF52B67008B0F1F /* BirthdayTheme.swift */; };
+		0DD04D292BF52D16008B0F1F /* UIColor_Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D282BF52D16008B0F1F /* UIColor_Ex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		0DD04D192BF24F24008B0F1F /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0DD04D1B2BF24F43008B0F1F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		0DD04D202BF2BDBC008B0F1F /* UserDefaultsPersistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistance.swift; sourceTree = "<group>"; };
+		0DD04D222BF49DBC008B0F1F /* PhotoPickerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerWrapper.swift; sourceTree = "<group>"; };
+		0DD04D252BF52B67008B0F1F /* BirthdayTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayTheme.swift; sourceTree = "<group>"; };
+		0DD04D282BF52D16008B0F1F /* UIColor_Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor_Ex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +97,7 @@
 		0DD04D062BF23482008B0F1F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0DD04D242BF49DCB008B0F1F /* Photo Picker Screen */,
 				0DD04D102BF23C39008B0F1F /* Birthday Screen */,
 				0DD04D072BF2348F008B0F1F /* Input Screen */,
 			);
@@ -125,6 +132,7 @@
 		0DD04D0A2BF2351E008B0F1F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0DD04D272BF52CF6008B0F1F /* Extensions */,
 				0DD04D1F2BF2BDAE008B0F1F /* Persistance */,
 				0DD04D172BF24EAA008B0F1F /* Routing */,
 				0DD04D0D2BF238E2008B0F1F /* Model */,
@@ -137,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				0DD04D0E2BF238F2008B0F1F /* BabyData.swift */,
+				0DD04D252BF52B67008B0F1F /* BirthdayTheme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,6 +183,22 @@
 				0DD04D202BF2BDBC008B0F1F /* UserDefaultsPersistance.swift */,
 			);
 			path = Persistance;
+			sourceTree = "<group>";
+		};
+		0DD04D242BF49DCB008B0F1F /* Photo Picker Screen */ = {
+			isa = PBXGroup;
+			children = (
+				0DD04D222BF49DBC008B0F1F /* PhotoPickerWrapper.swift */,
+			);
+			path = "Photo Picker Screen";
+			sourceTree = "<group>";
+		};
+		0DD04D272BF52CF6008B0F1F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0DD04D282BF52D16008B0F1F /* UIColor_Ex.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,11 +276,14 @@
 				0DD04CF62BF23069008B0F1F /* InputViewController.swift in Sources */,
 				0DD04D212BF2BDBC008B0F1F /* UserDefaultsPersistance.swift in Sources */,
 				0DD04CF22BF23069008B0F1F /* AppDelegate.swift in Sources */,
+				0DD04D262BF52B67008B0F1F /* BirthdayTheme.swift in Sources */,
 				0DD04D0F2BF238F2008B0F1F /* BabyData.swift in Sources */,
 				0DD04CF42BF23069008B0F1F /* SceneDelegate.swift in Sources */,
 				0DD04D0C2BF238BE008B0F1F /* InputPresenter.swift in Sources */,
 				0DD04D1C2BF24F43008B0F1F /* AppCoordinator.swift in Sources */,
+				0DD04D292BF52D16008B0F1F /* UIColor_Ex.swift in Sources */,
 				0DD04D162BF23CA8008B0F1F /* BirthdayPresenter.swift in Sources */,
+				0DD04D232BF49DBC008B0F1F /* PhotoPickerWrapper.swift in Sources */,
 				0DD04D142BF23C87008B0F1F /* BirthdayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

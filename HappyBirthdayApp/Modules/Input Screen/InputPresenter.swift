@@ -7,12 +7,17 @@
 
 import UIKit
 
-protocol InputPresenterProtocol {
+protocol InputPresenterProtocol: ImagePickerDelegate {
     func onViewDidLoad()
+    func onViewWillAppear()
     func handleNameChanged(name: String)
     func handleBirthDateChanged(date: Date)
-    func handleImageSelection(image: UIImage)
+    func handleChangeAvatarTapped()
     func handleShowBirthdayTap()
+}
+
+protocol InputPresenterDelegate: AnyObject {
+    func inputDataHasModified()
 }
 
 protocol InputViewProtocol: AnyObject {
@@ -21,8 +26,8 @@ protocol InputViewProtocol: AnyObject {
     func updateNextScreenButtonState()
 }
 
-protocol InputCoordinatorDelegate: AnyObject {
-    func showBirthday(with data: BabyData)
+protocol InputCoordinator: AnyObject, ImagePickerCoordinator {
+    func showBirthday(with data: BabyData, delegate: InputPresenterDelegate)
 }
 
 protocol PersistanceProtocol: AnyObject {
@@ -34,12 +39,21 @@ protocol PersistanceProtocol: AnyObject {
 
 class InputPresenter: InputPresenterProtocol {
     weak var view: InputViewProtocol?
-    weak var coordinatorDelegate: InputCoordinatorDelegate?
+    weak var Coordinator: InputCoordinator?
     var persistanceService: PersistanceProtocol!
+    private var imageGotUpdated: Bool = false
 
     func onViewDidLoad() {
         let baby = persistanceService.load()
         view?.update(baby: baby)
+    }
+
+    func onViewWillAppear() {
+        if imageGotUpdated {
+            let baby = persistanceService.load()
+            view?.updateImage(image: baby.image)
+            imageGotUpdated = false
+        }
     }
 
     func handleNameChanged(name: String) {
@@ -51,11 +65,23 @@ class InputPresenter: InputPresenterProtocol {
         persistanceService.save(date: date)
     }
 
-    func handleImageSelection(image: UIImage) {
-        persistanceService.save(image: image)
+    func handleChangeAvatarTapped() {
+        Coordinator?.showPhotoPicker(from: self)
     }
 
     func handleShowBirthdayTap() {
-        coordinatorDelegate?.showBirthday(with: Baby())
+        let baby = persistanceService.load()
+        Coordinator?.showBirthday(with: baby, delegate: self)
+    }
+
+    func handleImageSelection(image: UIImage) {
+        view?.updateImage(image: image)
+        persistanceService.save(image: image)
+    }
+}
+
+extension InputPresenter: InputPresenterDelegate {
+    func inputDataHasModified() {
+        imageGotUpdated = true
     }
 }
