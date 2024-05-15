@@ -18,6 +18,7 @@ protocol InputPresenterProtocol {
 protocol InputViewProtocol: AnyObject {
     func update(baby: BabyData)
     func updateImage(image: UIImage?)
+    func updateNextScreenButtonState()
 }
 
 protocol InputCoordinatorDelegate: AnyObject {
@@ -43,6 +44,7 @@ class InputPresenter: InputPresenterProtocol {
 
     func handleNameChanged(name: String) {
         persistanceService.save(name: name)
+        view?.updateNextScreenButtonState()
     }
 
     func handleBirthDateChanged(date: Date) {

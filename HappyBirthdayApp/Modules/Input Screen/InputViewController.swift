@@ -69,6 +69,7 @@ class InputViewController: UIViewController{
         let button = UIButton()
         button.setTitle(Const.buttonTitle, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.lightGray, for: .disabled)
         button.addTarget(self, action: #selector(showBirthdayButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -99,14 +100,14 @@ class InputViewController: UIViewController{
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextView.textDidChangeNotification, object: nameTextField)
-        NotificationCenter.default.addObserver(self, selector: #selector(textDidEndEditing), name: UITextView.textDidEndEditingNotification, object: nameTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange), name: UITextField.textDidChangeNotification, object: nameTextField)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidEndEditing), name: UITextField.textDidEndEditingNotification, object: nameTextField)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UITextView.textDidEndEditingNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UITextView.textDidChangeNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UITextField.textDidEndEditingNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UITextField.textDidChangeNotification, object: nil)
     }
 
     // MARK: - Handlers
@@ -139,13 +140,19 @@ extension InputViewController: InputViewProtocol {
 
         updateImage(image: baby.image)
 
-        updateButtonState()
+        updateNextScreenButtonState()
     }
     
     func updateImage(image: UIImage?) {
         guard let image = image else { return }
         avatarImageView.image = image
     }
+
+    func updateNextScreenButtonState() {
+        let isEnabled = isNonEmpty(name: nameTextField.text ?? "")
+        nextScreenButton.isEnabled = isEnabled
+    }
+
 }
 
 extension InputViewController: UITextFieldDelegate {
@@ -163,18 +170,13 @@ extension InputViewController: UITextFieldDelegate {
     }
 
     @objc func textDidChange() {
-        updateButtonState()
+        updateNextScreenButtonState()
     }
 }
 
 private extension InputViewController {
     func isNonEmpty(name: String) -> Bool {
         name.trimmingCharacters(in: .whitespaces).count > 0
-    }
-
-    func updateButtonState() {
-        let isEnabled = isNonEmpty(name: nameTextField.text ?? "")
-        nextScreenButton.isEnabled = isEnabled //YY_TODO: not disabling accordingly
     }
 
     func setupViews() {
