@@ -13,7 +13,7 @@ protocol ImagePickerDelegate: AnyObject {
 }
 
 protocol ImagePickerCoordinator: AnyObject {
-    func showPhotoPicker(from: ImagePickerDelegate)
+    func showImagePicker(from: ImagePickerDelegate)
     func showCamera(from: ImagePickerDelegate)
 }
 
@@ -28,7 +28,7 @@ class AppCoordinator: NSObject {
         let vc = InputViewController(presenter: presenter)
         presenter.view = vc
         presenter.persistanceService = UserDefaultsPersistance()
-        presenter.Coordinator = self
+        presenter.coordinator = self
         return vc
     }()
 
@@ -36,8 +36,10 @@ class AppCoordinator: NSObject {
         let presenter = BirthdayPresenter()
         let vc = BirthdayViewController(presenter: presenter)
         presenter.view = vc
+        presenter.baby = data
+        presenter.inputDelegate = delegate
         presenter.persistanceService = UserDefaultsPersistance()
-        presenter.Coordinator = self
+        presenter.coordinator = self
         return vc
     }
 
@@ -51,7 +53,7 @@ class AppCoordinator: NSObject {
         return imagePicker
     }
 
-    private func photoPickerScreen(sourceType: UIImagePickerController.SourceType) -> UIImagePickerController {
+    private func imagePickerScreen(sourceType: UIImagePickerController.SourceType) -> UIImagePickerController {
         makeUIViewController(sourceType: sourceType)
     }
 
@@ -70,7 +72,7 @@ extension AppCoordinator: Coordinator {
 }
 
 extension AppCoordinator: InputCoordinator {
-    func showPhotoPicker(from: any ImagePickerDelegate) {
+    func showImagePicker(from: any ImagePickerDelegate) {
 
     }
     
@@ -80,6 +82,7 @@ extension AppCoordinator: InputCoordinator {
     
     func showBirthday(with data: any BabyData, delegate: InputPresenterDelegate) {
         let vc = birthdayScreen(with: data, delegate: delegate)
+        
         rootViewController.pushViewController(vc, animated: true)
     }
 }

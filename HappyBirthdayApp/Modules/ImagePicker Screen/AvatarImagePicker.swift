@@ -1,5 +1,5 @@
 //
-//  PhotoPickerWrapper.swift
+//  AvatarImagePicker.swift
 //  HappyBirthdayApp
 //
 //  Created by Yehonatan Yehudai on 15/05/2024.

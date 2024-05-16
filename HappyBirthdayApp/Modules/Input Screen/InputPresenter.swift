@@ -39,7 +39,7 @@ protocol PersistanceProtocol: AnyObject {
 
 class InputPresenter: InputPresenterProtocol {
     weak var view: InputViewProtocol?
-    weak var Coordinator: InputCoordinator?
+    weak var coordinator: InputCoordinator?
     var persistanceService: PersistanceProtocol!
     private var imageGotUpdated: Bool = false
 
@@ -66,14 +66,16 @@ class InputPresenter: InputPresenterProtocol {
     }
 
     func handleChangeAvatarTapped() {
-        Coordinator?.showPhotoPicker(from: self)
+        coordinator?.showImagePicker(from: self)
     }
 
     func handleShowBirthdayTap() {
         let baby = persistanceService.load()
-        Coordinator?.showBirthday(with: baby, delegate: self)
+        coordinator?.showBirthday(with: baby, delegate: self)
     }
+}
 
+extension InputPresenter: ImagePickerDelegate {
     func handleImageSelection(image: UIImage) {
         view?.updateImage(image: image)
         persistanceService.save(image: image)
