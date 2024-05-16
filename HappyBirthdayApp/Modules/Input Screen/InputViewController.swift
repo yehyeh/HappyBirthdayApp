@@ -50,7 +50,7 @@ class InputViewController: UIViewController{
 
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: .init(systemName: "face.dashed"))
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         imageView.layer.masksToBounds = true
 
@@ -95,7 +95,7 @@ class InputViewController: UIViewController{
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        avatarImageView.layer.cornerRadius = min(avatarImageView.bounds.width, avatarImageView.bounds.height) / 2
+        avatarImageView.layer.cornerRadius = min(avatarImageView.frame.width, avatarImageView.frame.height) / 2
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -124,8 +124,8 @@ class InputViewController: UIViewController{
         }, completion: { _ in
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
                 sender.transform = .identity
-            }) { _ in
-
+            }) { [weak self] _ in
+                self?.presenter?.handleAvatarTapped()
             }
         })
     }

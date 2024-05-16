@@ -33,12 +33,10 @@ class AppCoordinator: NSObject {
     }()
 
     private func birthdayScreen(with data: any BabyData, delegate: InputPresenterDelegate) -> BirthdayViewController {
-        let presenter = BirthdayPresenter()
+        let presenter = BirthdayPresenter(persistanceService: UserDefaultsPersistance(), baby: data)
         let vc = BirthdayViewController(presenter: presenter)
         presenter.view = vc
-        presenter.baby = data
         presenter.inputDelegate = delegate
-        presenter.persistanceService = UserDefaultsPersistance()
         presenter.coordinator = self
         return vc
     }
@@ -59,36 +57,41 @@ class AppCoordinator: NSObject {
 
     init(window: UIWindow) {
         self.window = window
-        self.rootViewController = UINavigationController()
-        self.rootViewController.navigationBar.prefersLargeTitles = true
+        let rootVC = UINavigationController()
+        self.rootViewController = rootVC
         window.rootViewController = rootViewController
     }
 }
 
 extension AppCoordinator: Coordinator {
     func start() {
+        rootViewController.delegate = self
+        rootViewController.navigationBar.prefersLargeTitles = true
         rootViewController.setViewControllers([firstViewController], animated: false)
     }
 }
 
 extension AppCoordinator: InputCoordinator {
     func showImagePicker(from: any ImagePickerDelegate) {
-
+        imagePickerDelegate = from
+        rootViewController.present(imagePickerScreen(sourceType: .photoLibrary), animated: true)
     }
     
     func showCamera(from: any ImagePickerDelegate) {
-
+        imagePickerDelegate = from
+        rootViewController.present(imagePickerScreen(sourceType: .camera), animated: true)
     }
     
     func showBirthday(with data: any BabyData, delegate: InputPresenterDelegate) {
         let vc = birthdayScreen(with: data, delegate: delegate)
-        
         rootViewController.pushViewController(vc, animated: true)
+        rootViewController.setNavigationBarHidden(true, animated: true)
     }
 }
 
 extension AppCoordinator: BirthdayCoordinator {
-    func dismissBirthday() {
+    func closeBirthday() {
+        rootViewController.isNavigationBarHidden = false
         rootViewController.popViewController(animated: true)
     }
 }
@@ -100,7 +103,7 @@ extension AppCoordinator: UIImagePickerControllerDelegate & UINavigationControll
             imagePickerDelegate?.handleImageSelection(image: image)
             imagePickerDelegate = nil
         }
-
+        
         rootViewController.presentedViewController?.dismiss(animated: true)
     }
 }

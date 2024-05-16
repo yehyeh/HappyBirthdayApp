@@ -9,14 +9,15 @@ import UIKit
 
 class BirthdayViewController: UIViewController {
     private var presenter: BirthdayPresenter!
-
     @IBOutlet weak var foregroundImageView: UIImageView!
     @IBOutlet weak var headerTopLabel: UILabel!
     @IBOutlet weak var numericImageView: UIImageView!
     @IBOutlet weak var headerBottomLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
 
+    // MARK: - Life Cycle
     init(presenter: BirthdayPresenter) {
         self.presenter = presenter
         super.init(nibName: "BirthdayViewController", bundle: .main)
@@ -30,18 +31,64 @@ class BirthdayViewController: UIViewController {
         super.viewDidLoad()
         presenter.onViewDidLoad()
     }
-    
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let rect = avatarImageView.frame
+        avatarImageView.layer.cornerRadius = min(rect.width, rect.height) / 2
+    }
+
+    // MARK: - Handlers
+    @objc private func avatarImageTapped(gesture: UIGestureRecognizer) {
+        guard let sender = gesture.view else { return }
+
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+            sender.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+                sender.transform = .identity
+            }) { [weak self] _ in
+                self?.presenter?.avatarTapped()
+            }
+        })
+    }
+
     @IBAction func shareButtonTapped() {
         presenter.shareTapped()
     }
+
+    @IBAction func backButtonTapped() {
+        presenter.backTapped()
+    }
+
+    @objc private func handleSwipeBackGesture(_ gesture: UIScreenEdgePanGestureRecognizer) {
+        if gesture.state == .recognized {
+            navigationController?.popViewController(animated: true)
+        }
+    }
 }
+
 extension BirthdayViewController: BirthdayViewProtocol {
+    func setupContents() {
+        backButton.tintColor = UIColor(hex: "394562")
+        backButton.layer.shadowRadius = 5
+        backButton.layer.shadowOffset = .init(width: 5, height: 5)
+        backButton.layer.shadowColor = UIColor.gray.cgColor
+
+        let swipeBackGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleSwipeBackGesture(_:)))
+        swipeBackGesture.edges = .left
+        view.addGestureRecognizer(swipeBackGesture)
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarImageTapped))
+        avatarImageView.addGestureRecognizer(tapGesture)
+    }
+
     func fill(resources: BabyViewResource) {
         view.backgroundColor = resources.theme.backgroundColor
         foregroundImageView.image = UIImage(imageLiteralResourceName: resources.theme.foregroundImagePath)
-        headerTopLabel.text = resources.headerTopText
+        headerTopLabel.text = resources.headerTopText.uppercased()
         numericImageView.image = UIImage(imageLiteralResourceName: resources.headerAgeImagePath)
-        headerBottomLabel.text = resources.headerBottomText
+        headerBottomLabel.text = resources.headerBottomText.uppercased()
         avatarImageView.image = resources.baby.image
         shareButton.setTitle(resources.shareButtonText, for: .normal)
     }

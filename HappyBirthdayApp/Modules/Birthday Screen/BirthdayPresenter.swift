@@ -9,46 +9,62 @@ import UIKit
 
 protocol BirthdayPresenterProtocol: ImagePickerDelegate {
     func onViewDidLoad()
-    func handleImagePickerTapped()
-    func handleCameraTapped()
+    func avatarTapped()
+    func cameraTapped()
     func shareTapped()
-    func dismiss()
+    func backTapped()
 }
 
 protocol BirthdayViewProtocol: AnyObject {
+    func setupContents()
     func fill(resources: BabyViewResource)
+//    func hideNavigationBar()
+//    func resetNavigationBarVisibility()
     func updateImage(image: UIImage)
 }
 
 protocol BirthdayCoordinator: AnyObject, ImagePickerCoordinator {
-    func dismissBirthday()
+    func closeBirthday()
 }
 
 class BirthdayPresenter: BirthdayPresenterProtocol {
     weak var view: BirthdayViewProtocol?
     weak var coordinator: BirthdayCoordinator?
     weak var inputDelegate: InputPresenterDelegate?
-    var persistanceService: PersistanceProtocol!
-    var baby: BabyData!
+    private let persistanceService: PersistanceProtocol
+    private(set) var baby: BabyData
+
+    init(view: BirthdayViewProtocol? = nil,
+         coordinator: BirthdayCoordinator? = nil,
+         inputDelegate: InputPresenterDelegate? = nil,
+         persistanceService: PersistanceProtocol,
+         baby: BabyData) {
+        self.view = view
+        self.coordinator = coordinator
+        self.inputDelegate = inputDelegate
+        self.persistanceService = persistanceService
+        self.baby = baby
+    }
 
     func onViewDidLoad() {
+        view?.setupContents()
         view?.fill(resources: viewInitialResources)
     }
 
-    func handleImagePickerTapped() {
+    func avatarTapped() {
         coordinator?.showImagePicker(from: self)
     }
     
-    func handleCameraTapped() {
+    func cameraTapped() {
         coordinator?.showCamera(from: self)
     }
 
     func shareTapped() {
-        
+
     }
 
-    func dismiss() {
-        coordinator?.dismissBirthday()
+    func backTapped() {
+        coordinator?.closeBirthday()
     }
 }
 

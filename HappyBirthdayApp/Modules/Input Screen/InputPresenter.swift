@@ -12,7 +12,7 @@ protocol InputPresenterProtocol: ImagePickerDelegate {
     func onViewWillAppear()
     func handleNameChanged(name: String)
     func handleBirthDateChanged(date: Date)
-    func handleChangeAvatarTapped()
+    func handleAvatarTapped()
     func handleShowBirthdayTap()
 }
 
@@ -65,7 +65,7 @@ class InputPresenter: InputPresenterProtocol {
         persistanceService.save(date: date)
     }
 
-    func handleChangeAvatarTapped() {
+    func handleAvatarTapped() {
         coordinator?.showImagePicker(from: self)
     }
 

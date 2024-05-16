@@ -20,7 +20,6 @@
 		0DD04D1A2BF24F24008B0F1F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D192BF24F24008B0F1F /* Coordinator.swift */; };
 		0DD04D1C2BF24F43008B0F1F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D1B2BF24F43008B0F1F /* AppCoordinator.swift */; };
 		0DD04D212BF2BDBC008B0F1F /* UserDefaultsPersistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D202BF2BDBC008B0F1F /* UserDefaultsPersistance.swift */; };
-		0DD04D232BF49DBC008B0F1F /* AvatarImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D222BF49DBC008B0F1F /* AvatarImagePicker.swift */; };
 		0DD04D262BF52B67008B0F1F /* BirthdayTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D252BF52B67008B0F1F /* BirthdayTheme.swift */; };
 		0DD04D292BF52D16008B0F1F /* UIColor_Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04D282BF52D16008B0F1F /* UIColor_Ex.swift */; };
 		0DE884BF2BF64FBB00CC1C10 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE884BE2BF64FBB00CC1C10 /* AppLabel.swift */; };
@@ -44,7 +43,6 @@
 		0DD04D192BF24F24008B0F1F /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0DD04D1B2BF24F43008B0F1F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		0DD04D202BF2BDBC008B0F1F /* UserDefaultsPersistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersistance.swift; sourceTree = "<group>"; };
-		0DD04D222BF49DBC008B0F1F /* AvatarImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImagePicker.swift; sourceTree = "<group>"; };
 		0DD04D252BF52B67008B0F1F /* BirthdayTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayTheme.swift; sourceTree = "<group>"; };
 		0DD04D282BF52D16008B0F1F /* UIColor_Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor_Ex.swift; sourceTree = "<group>"; };
 		0DE884BE2BF64FBB00CC1C10 /* AppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLabel.swift; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 		0DD04D062BF23482008B0F1F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				0DD04D242BF49DCB008B0F1F /* ImagePicker Screen */,
 				0DD04D102BF23C39008B0F1F /* Birthday Screen */,
 				0DD04D072BF2348F008B0F1F /* Input Screen */,
 			);
@@ -192,20 +189,12 @@
 			path = Persistance;
 			sourceTree = "<group>";
 		};
-		0DD04D242BF49DCB008B0F1F /* ImagePicker Screen */ = {
-			isa = PBXGroup;
-			children = (
-				0DD04D222BF49DBC008B0F1F /* AvatarImagePicker.swift */,
-			);
-			path = "ImagePicker Screen";
-			sourceTree = "<group>";
-		};
 		0DD04D272BF52CF6008B0F1F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0DE884BE2BF64FBB00CC1C10 /* AppLabel.swift */,
 				0DE884C02BF6575600CC1C10 /* Date_Ex.swift */,
 				0DD04D282BF52D16008B0F1F /* UIColor_Ex.swift */,
-				0DE884BE2BF64FBB00CC1C10 /* AppLabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -295,7 +284,6 @@
 				0DD04D1C2BF24F43008B0F1F /* AppCoordinator.swift in Sources */,
 				0DD04D292BF52D16008B0F1F /* UIColor_Ex.swift in Sources */,
 				0DD04D162BF23CA8008B0F1F /* BirthdayPresenter.swift in Sources */,
-				0DD04D232BF49DBC008B0F1F /* AvatarImagePicker.swift in Sources */,
 				0DD04D142BF23C87008B0F1F /* BirthdayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,7 +354,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -423,7 +411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -445,6 +433,9 @@
 				INFOPLIST_FILE = HappyBirthdayApp/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Birthdaying;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This application needs permission to use your camera.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This application needs permission to save Photos to your library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This application saves Photos to your library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -475,6 +466,9 @@
 				INFOPLIST_FILE = HappyBirthdayApp/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Birthdaying;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This application needs permission to use your camera.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This application needs permission to save Photos to your library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This application saves Photos to your library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
