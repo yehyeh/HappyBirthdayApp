@@ -68,8 +68,11 @@ class InputViewController: UIViewController{
     private lazy var nextScreenButton: UIButton = {
         let button = UIButton()
         button.setTitle(Const.buttonTitle, for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.lightGray, for: .disabled)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 5
+        button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(showBirthdayButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -95,7 +98,7 @@ class InputViewController: UIViewController{
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        avatarImageView.layer.cornerRadius = min(avatarImageView.frame.width, avatarImageView.frame.height) / 2
+        avatarImageView.layer.cornerRadius = avatarImageView.boundsRadius
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -131,7 +134,7 @@ class InputViewController: UIViewController{
     }
 
     @objc private func showBirthdayButtonTapped() {
-        presenter.handleBirthDateChanged(date: birthdatePicker.date)// TODO: detect and trigger earlier
+        presenter.handleBirthDateChanged(date: birthdatePicker.date)
         presenter.handleShowBirthdayTap()
     }
 }
@@ -162,16 +165,13 @@ extension InputViewController: InputViewProtocol {
 
 extension InputViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let text = textField.text else { return true }
-        presenter.handleNameChanged(name: text)
-        view.endEditing(true)
+        onEndedTextEditing()
         return false
     }
     
     // MARK: - Observer handlers
     @objc func textDidEndEditing(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        presenter.handleNameChanged(name: text)
+        onEndedTextEditing()
     }
 
     @objc func textDidChange() {
@@ -180,6 +180,12 @@ extension InputViewController: UITextFieldDelegate {
 }
 
 private extension InputViewController {
+    func onEndedTextEditing() {
+        guard let name = nameTextField.text else { return }
+        presenter.handleNameChanged(name: name)
+        view.endEditing(true)
+    }
+
     func isNonEmpty(name: String) -> Bool {
         name.trimmingCharacters(in: .whitespaces).count > 0
     }
