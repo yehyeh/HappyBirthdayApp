@@ -13,8 +13,8 @@
                 <outlet property="avatarImageView" destination="fo2-PZ-fXa" id="BlJ-o9-R4b"/>
                 <outlet property="backButton" destination="JQx-R1-dM1" id="TQb-nM-sb8"/>
                 <outlet property="cameraImageView" destination="kNW-KM-Fpe" id="dBU-Kk-tbp"/>
-                <outlet property="cameraImageViewCenterX" destination="yDh-0t-3jO" id="ICy-cH-ed1"/>
-                <outlet property="cameraImageViewCenterY" destination="Rcc-sM-pN9" id="eDv-Xh-qDG"/>
+                <outlet property="cameraImageViewCenterX" destination="FyM-lm-D3L" id="8Cf-Ca-g2d"/>
+                <outlet property="cameraImageViewCenterY" destination="uaO-xf-Ji3" id="MZk-7h-v9m"/>
                 <outlet property="foregroundImageView" destination="1XA-jz-xJH" id="TqY-dl-bbp"/>
                 <outlet property="headerBottomLabel" destination="T2Y-1D-Pr2" id="dT5-LB-hvt"/>
                 <outlet property="headerTopLabel" destination="1xi-H1-Y31" id="5gU-Sh-Vh5"/>
@@ -43,6 +43,13 @@
                         <constraint firstAttribute="width" secondItem="y8N-Dc-OWN" secondAttribute="height" multiplier="1:1" id="Qze-o3-UY5"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="w5x-hZ-apg" userLabel="MidContentPlaceholder">
+                    <rect key="frame" x="50" y="276.66666666666674" width="314" height="400.33333333333326"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" notEnabled="YES"/>
+                    </accessibility>
+                </view>
                 <stackView opaque="NO" contentMode="center" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Rvn-IZ-S2y" userLabel="MidContentView">
                     <rect key="frame" x="50" y="276.66666666666674" width="314" height="400.33333333333326"/>
                     <subviews>
@@ -66,26 +73,13 @@
                         <constraint firstItem="n0S-eu-r77" firstAttribute="height" secondItem="zaP-hb-wM3" secondAttribute="height" id="ujo-Ev-wDb"/>
                     </constraints>
                 </stackView>
-                <view contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="w5x-hZ-apg" userLabel="MidContentPlaceholder">
-                    <rect key="frame" x="50" y="276.66666666666674" width="314" height="400.33333333333326"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera.yellow" translatesAutoresizingMaskIntoConstraints="NO" id="kNW-KM-Fpe">
-                            <rect key="frame" x="121" y="164.33333333333331" width="72" height="72"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="72" id="Jtp-ds-keN"/>
-                                <constraint firstAttribute="width" secondItem="kNW-KM-Fpe" secondAttribute="height" multiplier="1:1" id="VGw-Yn-udw"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <accessibility key="accessibilityConfiguration">
-                        <accessibilityTraits key="traits" notEnabled="YES"/>
-                    </accessibility>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera.yellow" translatesAutoresizingMaskIntoConstraints="NO" id="kNW-KM-Fpe">
+                    <rect key="frame" x="171" y="441" width="72" height="72"/>
                     <constraints>
-                        <constraint firstItem="kNW-KM-Fpe" firstAttribute="centerY" secondItem="w5x-hZ-apg" secondAttribute="centerY" id="Rcc-sM-pN9"/>
-                        <constraint firstItem="kNW-KM-Fpe" firstAttribute="centerX" secondItem="w5x-hZ-apg" secondAttribute="centerX" id="yDh-0t-3jO"/>
+                        <constraint firstAttribute="width" constant="72" id="Jtp-ds-keN"/>
+                        <constraint firstAttribute="width" secondItem="kNW-KM-Fpe" secondAttribute="height" multiplier="1:1" id="VGw-Yn-udw"/>
                     </constraints>
-                </view>
+                </imageView>
                 <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="background.elephant" translatesAutoresizingMaskIntoConstraints="NO" id="1XA-jz-xJH">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <accessibility key="accessibilityConfiguration">
@@ -198,6 +192,7 @@
                 <constraint firstItem="a4b-lM-fAJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="86I-gc-tbI"/>
                 <constraint firstItem="JQx-R1-dM1" firstAttribute="leading" secondItem="ajk-E4-4qa" secondAttribute="leading" constant="16" id="8wu-QI-tkO"/>
                 <constraint firstItem="Rvn-IZ-S2y" firstAttribute="top" secondItem="w5x-hZ-apg" secondAttribute="top" id="CAL-GB-dVa"/>
+                <constraint firstItem="kNW-KM-Fpe" firstAttribute="centerX" secondItem="w5x-hZ-apg" secondAttribute="centerX" id="FyM-lm-D3L"/>
                 <constraint firstItem="1xi-H1-Y31" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="263/375" id="G4T-Rn-0JP"/>
                 <constraint firstItem="a4b-lM-fAJ" firstAttribute="top" secondItem="w5x-hZ-apg" secondAttribute="bottom" id="K8R-zr-Eu7"/>
                 <constraint firstItem="yiv-dD-yyc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Mat-hq-J7h"/>
@@ -216,6 +211,7 @@
                 <constraint firstItem="ajk-E4-4qa" firstAttribute="bottom" secondItem="a4b-lM-fAJ" secondAttribute="bottom" id="pRc-CT-ee7"/>
                 <constraint firstItem="yiv-dD-yyc" firstAttribute="top" secondItem="ajk-E4-4qa" secondAttribute="top" constant="20" id="ric-v7-4Or"/>
                 <constraint firstItem="w5x-hZ-apg" firstAttribute="trailing" secondItem="Rvn-IZ-S2y" secondAttribute="trailing" id="ty5-ha-rKW"/>
+                <constraint firstItem="kNW-KM-Fpe" firstAttribute="centerY" secondItem="w5x-hZ-apg" secondAttribute="centerY" id="uaO-xf-Ji3"/>
                 <constraint firstItem="JQx-R1-dM1" firstAttribute="top" secondItem="ajk-E4-4qa" secondAttribute="top" constant="16" id="ubN-P7-cVZ"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
