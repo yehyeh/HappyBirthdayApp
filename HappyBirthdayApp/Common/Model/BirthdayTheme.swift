@@ -19,6 +19,17 @@ enum BirthdayTheme: BirthdayThemable {
     case blue
     case green
 
+    var borderColor: UIColor {
+        switch self {
+            case .yellow:
+                return UIColor(hex: "F9BE22")
+            case .blue:
+                return UIColor(hex: "8BD3E4")
+            case .green:
+                return UIColor(hex: "6DC4AD")
+        }
+    }
+
     var backgroundColor: UIColor {
         switch self {
             case .yellow:

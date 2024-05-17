@@ -71,9 +71,6 @@ class BirthdayViewController: UIViewController {
 extension BirthdayViewController: BirthdayViewProtocol {
     func setupContents() {
         backButton.tintColor = UIColor(hex: "394562")
-        backButton.layer.shadowRadius = 5
-        backButton.layer.shadowOffset = .init(width: 5, height: 5)
-        backButton.layer.shadowColor = UIColor.gray.cgColor
 
         let swipeBackGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleSwipeBackGesture(_:)))
         swipeBackGesture.edges = .left
@@ -84,12 +81,19 @@ extension BirthdayViewController: BirthdayViewProtocol {
     }
 
     func fill(resources: BabyViewResource) {
-        view.backgroundColor = resources.theme.backgroundColor
-        foregroundImageView.image = UIImage(imageLiteralResourceName: resources.theme.foregroundImagePath)
+        let theme = resources.theme
+        view.backgroundColor = theme.backgroundColor
+        foregroundImageView.image = UIImage(imageLiteralResourceName: theme.foregroundImagePath)
         headerTopLabel.text = resources.headerTopText.uppercased()
         numericImageView.image = UIImage(imageLiteralResourceName: resources.headerAgeImagePath)
         headerBottomLabel.text = resources.headerBottomText.uppercased()
-        avatarImageView.image = resources.baby.image
+        if let image = resources.baby.image {
+            avatarImageView.image = image
+            avatarImageView.layer.borderWidth = 6
+            avatarImageView.layer.borderColor = theme.borderColor.cgColor
+        } else {
+            avatarImageView.image = UIImage(imageLiteralResourceName: theme.avatarPlaceholderImagePath)
+        }
         shareButton.setTitle(resources.shareButtonText, for: .normal)
     }
 

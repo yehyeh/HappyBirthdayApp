@@ -51,7 +51,7 @@
                             <rect key="frame" x="47" y="0.0" width="220" height="50.666666666666664"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" image="placeholder.border.yellow" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-PZ-fXa">
+                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" image="placeholder.border.yellow" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-PZ-fXa">
                             <rect key="frame" x="0.0" y="50.666666666666686" width="314" height="314"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="fo2-PZ-fXa" secondAttribute="height" multiplier="1:1" id="eSb-i7-LQi"/>
@@ -67,8 +67,11 @@
                         <constraint firstItem="n0S-eu-r77" firstAttribute="height" secondItem="zaP-hb-wM3" secondAttribute="height" id="ujo-Ev-wDb"/>
                     </constraints>
                 </stackView>
-                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" image="background.elephant" translatesAutoresizingMaskIntoConstraints="NO" id="1XA-jz-xJH">
+                <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="background.elephant" translatesAutoresizingMaskIntoConstraints="NO" id="1XA-jz-xJH">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                    </accessibility>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="800" verticalHuggingPriority="800" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yiv-dD-yyc" userLabel="Header Stack View">
                     <rect key="frame" x="61.666666666666657" y="64" width="290.66666666666674" height="178"/>

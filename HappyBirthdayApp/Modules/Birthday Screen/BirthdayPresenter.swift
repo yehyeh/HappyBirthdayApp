@@ -89,8 +89,6 @@ private extension BirthdayPresenter {
     }
 
     var viewInitialResources: BabyViewResource {
-        let theme = Self.randomTheme
-        baby.image = baby.image ?? UIImage(imageLiteralResourceName: theme.avatarPlaceholderImagePath)
-        return BabyViewResource(baby: baby, theme: theme)
+        BabyViewResource(baby: baby, theme: Self.randomTheme)
     }
 }
