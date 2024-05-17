@@ -52,7 +52,7 @@ class BirthdayViewController: UIViewController {
             }
         })
     }
-
+    
     @IBAction func shareButtonTapped() {
         presenter.shareTapped()
     }
@@ -69,8 +69,28 @@ class BirthdayViewController: UIViewController {
 }
 
 extension BirthdayViewController: BirthdayViewProtocol {
-    func setupContents() {
-        backButton.tintColor = UIColor(hex: "394562")
+    var captureAsImage: UIImage {
+        captureAsImage1
+    }
+
+    var captureAsImage1: UIImage {
+        let renderer = UIGraphicsImageRenderer(size: view.bounds.size)
+
+        let image = renderer.image { context in
+            view.layer.render(in: context.cgContext)
+        }
+
+        return image
+    }
+
+    func setupContents(interactable: Bool) {
+        if !interactable {
+            backButton.isHidden = true
+            shareButton.isHidden = true
+            return
+        } else {
+            backButton.tintColor = UIColor(hex: "394562")
+        }
 
         let swipeBackGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleSwipeBackGesture(_:)))
         swipeBackGesture.edges = .left

@@ -41,8 +41,15 @@ class AppCoordinator: NSObject {
         return vc
     }
 
-    private func makeUIViewController(sourceType: UIImagePickerController.SourceType) -> UIImagePickerController {
+    private func birthdayScreen(with data: any BabyData) -> BirthdayViewController {
+        let presenter = BirthdayPresenter(baby: data)
+        let vc = BirthdayViewController(presenter: presenter)
+        presenter.view = vc
+        presenter.coordinator = self
+        return vc
+    }
 
+    private func makeUIViewController(sourceType: UIImagePickerController.SourceType) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = false
         imagePicker.sourceType = sourceType
@@ -90,6 +97,11 @@ extension AppCoordinator: InputCoordinator {
 }
 
 extension AppCoordinator: BirthdayCoordinator {
+    func showBirthdayShareMenu() {
+        guard let captured = capturedBirthdayScreen else { return }
+        showShareMenu(with: captured)
+    }
+
     func closeBirthday() {
         rootViewController.isNavigationBarHidden = false
         rootViewController.popViewController(animated: true)
@@ -105,5 +117,18 @@ extension AppCoordinator: UIImagePickerControllerDelegate & UINavigationControll
         }
         
         rootViewController.presentedViewController?.dismiss(animated: true)
+    }
+}
+
+private extension AppCoordinator {
+    var capturedBirthdayScreen: UIImage? {
+        guard let data = UserDefaultsPersistance().load() as? Baby else { return nil }
+        return birthdayScreen(with: data).captureAsImage
+    }
+
+    func showShareMenu(with image: UIImage) {
+        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [.airDrop, .print, .saveToCameraRoll]
+        rootViewController.present(activityViewController, animated: true)
     }
 }

@@ -16,14 +16,13 @@ protocol BirthdayPresenterProtocol: ImagePickerDelegate {
 }
 
 protocol BirthdayViewProtocol: AnyObject {
-    func setupContents()
+    func setupContents(interactable: Bool)
     func fill(resources: BabyViewResource)
-//    func hideNavigationBar()
-//    func resetNavigationBarVisibility()
     func updateImage(image: UIImage)
 }
 
 protocol BirthdayCoordinator: AnyObject, ImagePickerCoordinator {
+    func showBirthdayShareMenu()
     func closeBirthday()
 }
 
@@ -31,7 +30,7 @@ class BirthdayPresenter: BirthdayPresenterProtocol {
     weak var view: BirthdayViewProtocol?
     weak var coordinator: BirthdayCoordinator?
     weak var inputDelegate: InputPresenterDelegate?
-    private let persistanceService: PersistanceProtocol
+    private let persistanceService: PersistanceProtocol?
     private(set) var baby: BabyData
 
     init(view: BirthdayViewProtocol? = nil,
@@ -46,8 +45,15 @@ class BirthdayPresenter: BirthdayPresenterProtocol {
         self.baby = baby
     }
 
+    init(view: BirthdayViewProtocol? = nil,
+         baby: BabyData) {
+        self.view = view
+        self.baby = baby
+        self.persistanceService = nil
+    }
+
     func onViewDidLoad() {
-        view?.setupContents()
+        view?.setupContents(interactable: !isCaptureState)
         view?.fill(resources: viewInitialResources)
     }
 
@@ -60,7 +66,7 @@ class BirthdayPresenter: BirthdayPresenterProtocol {
     }
 
     func shareTapped() {
-
+        coordinator?.showBirthdayShareMenu()
     }
 
     func backTapped() {
@@ -70,13 +76,15 @@ class BirthdayPresenter: BirthdayPresenterProtocol {
 
 extension BirthdayPresenter: ImagePickerDelegate {
     func handleImageSelection(image: UIImage) {
-        persistanceService.save(image: image)
+        persistanceService?.save(image: image)
         view?.updateImage(image: image)
         inputDelegate?.inputDataHasModified()
     }
 }
 
 private extension BirthdayPresenter {
+    var isCaptureState: Bool { persistanceService == nil }
+
     static var randomTheme: BirthdayTheme {
         switch Int.random(in: 0...2) {
             case 0:
