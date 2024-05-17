@@ -16,6 +16,9 @@ class BirthdayViewController: UIViewController {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var cameraImageView: UIImageView!
+    @IBOutlet weak var cameraImageViewCenterX: NSLayoutConstraint!
+    @IBOutlet weak var cameraImageViewCenterY: NSLayoutConstraint!
 
     // MARK: - Life Cycle
     init(presenter: BirthdayPresenter) {
@@ -34,22 +37,24 @@ class BirthdayViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let rect = avatarImageView.frame
-        avatarImageView.layer.cornerRadius = min(rect.width, rect.height) / 2
+        avatarImageView.layer.cornerRadius = avatarImageView.boundsRadius
+
+        // Position camera option: r*cos(45)
+        let cordinates = (avatarImageView.frame.width/2) * pow(2, 0.5) / 2.0
+        cameraImageViewCenterX.constant = cordinates
+        cameraImageViewCenterY.constant = -cordinates
     }
 
     // MARK: - Handlers
-    @objc private func avatarImageTapped(gesture: UIGestureRecognizer) {
-        guard let sender = gesture.view else { return }
+    @objc private func cameraImageTapped(gesture: UIGestureRecognizer) {
+        UIView.animateOnTap(gesture: gesture, completion: { [weak self] _ in
+            self?.presenter.cameraTapped()
+        })
+    }
 
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
-            sender.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
-                sender.transform = .identity
-            }) { [weak self] _ in
-                self?.presenter?.avatarTapped()
-            }
+    @objc private func avatarImageTapped(gesture: UIGestureRecognizer) {
+        UIView.animateOnTap(gesture: gesture, completion: { [weak self] _ in
+            self?.presenter?.avatarTapped()
         })
     }
     
@@ -70,10 +75,6 @@ class BirthdayViewController: UIViewController {
 
 extension BirthdayViewController: BirthdayViewProtocol {
     var captureAsImage: UIImage {
-        captureAsImage1
-    }
-
-    var captureAsImage1: UIImage {
         let renderer = UIGraphicsImageRenderer(size: view.bounds.size)
 
         let image = renderer.image { context in
@@ -87,33 +88,41 @@ extension BirthdayViewController: BirthdayViewProtocol {
         if !interactable {
             backButton.isHidden = true
             shareButton.isHidden = true
+            cameraImageView.isHidden = true
             return
-        } else {
-            backButton.tintColor = UIColor(hex: "394562")
         }
+        backButton.tintColor = UIColor(hex: "394562")
 
         let swipeBackGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleSwipeBackGesture(_:)))
         swipeBackGesture.edges = .left
         view.addGestureRecognizer(swipeBackGesture)
 
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarImageTapped))
-        avatarImageView.addGestureRecognizer(tapGesture)
+        let avatarTapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarImageTapped))
+        avatarImageView.addGestureRecognizer(avatarTapGesture)
+
+        let camTapGesture = UITapGestureRecognizer(target: self, action: #selector(cameraImageTapped))
+        cameraImageView.addGestureRecognizer(camTapGesture)
     }
 
     func fill(resources: BabyViewResource) {
         let theme = resources.theme
         view.backgroundColor = theme.backgroundColor
-        foregroundImageView.image = UIImage(imageLiteralResourceName: theme.foregroundImagePath)
+
         headerTopLabel.text = resources.headerTopText.uppercased()
-        numericImageView.image = UIImage(imageLiteralResourceName: resources.headerAgeImagePath)
         headerBottomLabel.text = resources.headerBottomText.uppercased()
+
+        foregroundImageView.image = UIImage(named: theme.foregroundImagePath)
+        numericImageView.image = UIImage(named: resources.headerAgeImagePath)
+        cameraImageView.image = UIImage(named: theme.cameraImagePath)
+
         if let image = resources.baby.image {
             avatarImageView.image = image
             avatarImageView.layer.borderWidth = 6
             avatarImageView.layer.borderColor = theme.borderColor.cgColor
         } else {
-            avatarImageView.image = UIImage(imageLiteralResourceName: theme.avatarPlaceholderImagePath)
+            avatarImageView.image = UIImage(named: theme.avatarPlaceholderImagePath)
         }
+
         shareButton.setTitle(resources.shareButtonText, for: .normal)
     }
 
