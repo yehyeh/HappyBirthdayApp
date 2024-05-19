@@ -32,19 +32,11 @@ class AppCoordinator: NSObject {
         return vc
     }()
 
-    private func birthdayScreen(with data: any BabyData, delegate: InputPresenterDelegate) -> BirthdayViewController {
-        let presenter = BirthdayPresenter(persistanceService: UserDefaultsPersistance(), baby: data)
+    private func birthdayScreen(theme: BirthdayTheme, screenCaptureMode: Bool, delegate: InputPresenterDelegate? = nil) -> BirthdayViewController {
+        let presenter = BirthdayPresenter(persistanceService: UserDefaultsPersistance(), theme: theme, isScreenCaptureMode: screenCaptureMode)
         let vc = BirthdayViewController(presenter: presenter)
         presenter.view = vc
         presenter.inputDelegate = delegate
-        presenter.coordinator = self
-        return vc
-    }
-
-    private func birthdayScreen(with data: any BabyData) -> BirthdayViewController {
-        let presenter = BirthdayPresenter(baby: data)
-        let vc = BirthdayViewController(presenter: presenter)
-        presenter.view = vc
         presenter.coordinator = self
         return vc
     }
@@ -89,17 +81,18 @@ extension AppCoordinator: InputCoordinator {
         rootViewController.present(imagePickerScreen(sourceType: .camera), animated: true)
     }
     
-    func showBirthday(with data: any BabyData, delegate: InputPresenterDelegate) {
-        let vc = birthdayScreen(with: data, delegate: delegate)
+    func showBirthday(delegate: InputPresenterDelegate?) {
+        let vc = birthdayScreen(theme: .random(), screenCaptureMode: false, delegate: delegate)
         rootViewController.pushViewController(vc, animated: true)
         rootViewController.setNavigationBarHidden(true, animated: true)
     }
 }
 
 extension AppCoordinator: BirthdayCoordinator {
-    func showBirthdayShareMenu() {
-        guard let captured = capturedBirthdayScreen else { return }
-        showShareMenu(with: captured)
+    func showBirthdayShareMenu(theme: BirthdayTheme) {
+        let captureScreen = birthdayScreen(theme: theme, screenCaptureMode: true)
+        let capturedImage = captureScreen.captureAsImage
+        showShareMenu(with: capturedImage)
     }
 
     func closeBirthday() {
@@ -121,11 +114,6 @@ extension AppCoordinator: UIImagePickerControllerDelegate & UINavigationControll
 }
 
 private extension AppCoordinator {
-    var capturedBirthdayScreen: UIImage? {
-        guard let data = UserDefaultsPersistance().load() as? Baby else { return nil }
-        return birthdayScreen(with: data).captureAsImage
-    }
-
     func showShareMenu(with image: UIImage) {
         let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [.airDrop, .print, .saveToCameraRoll]

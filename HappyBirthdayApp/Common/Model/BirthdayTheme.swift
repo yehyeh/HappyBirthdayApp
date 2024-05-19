@@ -7,14 +7,7 @@
 
 import UIKit
 
-protocol BirthdayThemable {
-    var backgroundColor: UIColor { get }
-    var foregroundImagePath: String { get }
-    var avatarPlaceholderImagePath: String { get }
-    var cameraImagePath: String { get }
-}
-
-enum BirthdayTheme: BirthdayThemable {
+enum BirthdayTheme {
     case yellow
     case blue
     case green
@@ -71,6 +64,17 @@ enum BirthdayTheme: BirthdayThemable {
                 return "camera.blue"
             case .green:
                 return "camera.green"
+        }
+    }
+    
+    static func random() -> BirthdayTheme {
+        switch Int.random(in: 0...2) {
+            case 0:
+                return .yellow
+            case 1:
+                return .green
+            default:
+                return .blue
         }
     }
 }

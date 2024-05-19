@@ -27,7 +27,7 @@ protocol InputViewProtocol: AnyObject {
 }
 
 protocol InputCoordinator: AnyObject, ImagePickerCoordinator {
-    func showBirthday(with data: BabyData, delegate: InputPresenterDelegate)
+    func showBirthday(delegate: InputPresenterDelegate?)
 }
 
 protocol PersistanceProtocol: AnyObject {
@@ -70,8 +70,7 @@ class InputPresenter: InputPresenterProtocol {
     }
 
     func handleShowBirthdayTap() {
-        let baby = persistanceService.load()
-        coordinator?.showBirthday(with: baby, delegate: self)
+        coordinator?.showBirthday(delegate: self)
     }
 }
 

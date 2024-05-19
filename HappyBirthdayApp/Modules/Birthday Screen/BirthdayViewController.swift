@@ -84,8 +84,8 @@ extension BirthdayViewController: BirthdayViewProtocol {
         return image
     }
 
-    func setupContents(interactable: Bool) {
-        if !interactable {
+    func setupContents(inScreenCaptureMode: Bool) {
+        if inScreenCaptureMode {
             backButton.isHidden = true
             shareButton.isHidden = true
             cameraImageView.isHidden = true
