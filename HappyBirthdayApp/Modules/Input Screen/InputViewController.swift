@@ -90,7 +90,8 @@ class InputViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Const.title
-        view.backgroundColor = .white
+
+        view.backgroundColor = .systemBackground
         setupViews()
         setupConstraints()
         presenter.onViewDidLoad()
