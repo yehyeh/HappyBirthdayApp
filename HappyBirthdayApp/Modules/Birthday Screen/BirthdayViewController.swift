@@ -59,7 +59,7 @@ class BirthdayViewController: UIViewController {
     }
     
     @IBAction func shareButtonTapped() {
-        presenter.shareTapped()
+        presenter.shareTapped(sender: shareButton)
     }
 
     @IBAction func backButtonTapped() {

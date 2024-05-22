@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0D73DFDB2BF7890200231062 /* UIView_Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D73DFDA2BF7890200231062 /* UIView_Ex.swift */; };
+		0D73DFDD2BFE523900231062 /* ShareableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D73DFDC2BFE523900231062 /* ShareableImage.swift */; };
+		0D73DFDF2BFE542300231062 /* UIImage_Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D73DFDE2BFE542300231062 /* UIImage_Ex.swift */; };
 		0DD04CF22BF23069008B0F1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04CF12BF23069008B0F1F /* AppDelegate.swift */; };
 		0DD04CF42BF23069008B0F1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04CF32BF23069008B0F1F /* SceneDelegate.swift */; };
 		0DD04CF62BF23069008B0F1F /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD04CF52BF23069008B0F1F /* InputViewController.swift */; };
@@ -30,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		0D73DFDA2BF7890200231062 /* UIView_Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView_Ex.swift; sourceTree = "<group>"; };
+		0D73DFDC2BFE523900231062 /* ShareableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareableImage.swift; sourceTree = "<group>"; };
+		0D73DFDE2BFE542300231062 /* UIImage_Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage_Ex.swift; sourceTree = "<group>"; };
 		0DD04CEE2BF23069008B0F1F /* HappyBirthdayApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyBirthdayApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DD04CF12BF23069008B0F1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DD04CF32BF23069008B0F1F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +202,8 @@
 				0DE884C02BF6575600CC1C10 /* Date_Ex.swift */,
 				0DD04D282BF52D16008B0F1F /* UIColor_Ex.swift */,
 				0D73DFDA2BF7890200231062 /* UIView_Ex.swift */,
+				0D73DFDC2BFE523900231062 /* ShareableImage.swift */,
+				0D73DFDE2BFE542300231062 /* UIImage_Ex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -283,9 +289,11 @@
 				0DD04D262BF52B67008B0F1F /* BirthdayTheme.swift in Sources */,
 				0DD04D0F2BF238F2008B0F1F /* BabyData.swift in Sources */,
 				0DD04CF42BF23069008B0F1F /* SceneDelegate.swift in Sources */,
+				0D73DFDD2BFE523900231062 /* ShareableImage.swift in Sources */,
 				0DD04D0C2BF238BE008B0F1F /* InputPresenter.swift in Sources */,
 				0DD04D1C2BF24F43008B0F1F /* AppCoordinator.swift in Sources */,
 				0DD04D292BF52D16008B0F1F /* UIColor_Ex.swift in Sources */,
+				0D73DFDF2BFE542300231062 /* UIImage_Ex.swift in Sources */,
 				0DD04D162BF23CA8008B0F1F /* BirthdayPresenter.swift in Sources */,
 				0DD04D142BF23C87008B0F1F /* BirthdayViewController.swift in Sources */,
 				0D73DFDB2BF7890200231062 /* UIView_Ex.swift in Sources */,

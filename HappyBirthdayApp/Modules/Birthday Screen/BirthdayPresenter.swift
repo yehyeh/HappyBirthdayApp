@@ -11,7 +11,7 @@ protocol BirthdayPresenterProtocol: ImagePickerDelegate {
     func onViewDidLoad()
     func avatarTapped()
     func cameraTapped()
-    func shareTapped()
+    func shareTapped(sender: UIView)
     func backTapped()
 }
 
@@ -22,7 +22,7 @@ protocol BirthdayViewProtocol: AnyObject {
 }
 
 protocol BirthdayCoordinator: AnyObject, ImagePickerCoordinator {
-    func showBirthdayShareMenu(theme: BirthdayTheme)
+    func showBirthdayShareMenu(theme: BirthdayTheme, sender: UIView)
     func closeBirthday()
 }
 
@@ -63,8 +63,8 @@ class BirthdayPresenter: BirthdayPresenterProtocol {
         coordinator?.showCamera(from: self)
     }
 
-    func shareTapped() {
-        coordinator?.showBirthdayShareMenu(theme: theme)
+    func shareTapped(sender: UIView) {
+        coordinator?.showBirthdayShareMenu(theme: theme, sender: sender)
     }
 
     func backTapped() {

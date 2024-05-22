@@ -73,12 +73,12 @@ extension AppCoordinator: Coordinator {
 extension AppCoordinator: InputCoordinator {
     func showImagePicker(from: any ImagePickerDelegate) {
         imagePickerDelegate = from
-        rootViewController.present(imagePickerScreen(sourceType: .photoLibrary), animated: true)
+        present(imagePickerScreen(sourceType: .photoLibrary), animated: true)
     }
     
     func showCamera(from: any ImagePickerDelegate) {
         imagePickerDelegate = from
-        rootViewController.present(imagePickerScreen(sourceType: .camera), animated: true)
+        present(imagePickerScreen(sourceType: .camera), animated: true)
     }
     
     func showBirthday(delegate: InputPresenterDelegate?) {
@@ -89,10 +89,11 @@ extension AppCoordinator: InputCoordinator {
 }
 
 extension AppCoordinator: BirthdayCoordinator {
-    func showBirthdayShareMenu(theme: BirthdayTheme) {
+    func showBirthdayShareMenu(theme: BirthdayTheme, sender: UIView) {
         let captureScreen = birthdayScreen(theme: theme, screenCaptureMode: true)
-        let capturedImage = captureScreen.captureAsImage
-        showShareMenu(with: capturedImage)
+        let shareable = ShareableImage(image: captureScreen.captureAsImage, title: "Check out the news 🥳")
+
+        showShareMenu(for: shareable, sender: sender)
     }
 
     func closeBirthday() {
@@ -114,9 +115,18 @@ extension AppCoordinator: UIImagePickerControllerDelegate & UINavigationControll
 }
 
 private extension AppCoordinator {
-    func showShareMenu(with image: UIImage) {
-        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        activityViewController.excludedActivityTypes = [.airDrop, .print, .saveToCameraRoll]
-        rootViewController.present(activityViewController, animated: true)
+    func present(_ viewControllerToPresent: UIViewController, animated: Bool = true) {
+        guard let top = rootViewController.topViewController, top.presentedViewController == nil else { return }
+        rootViewController.present(viewControllerToPresent, animated: animated)
+    }
+
+    func showShareMenu(for item: UIActivityItemSource, sender: UIView) {
+        let activityViewController = UIActivityViewController(activityItems: [item], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = []
+        let popover = activityViewController.popoverPresentationController
+        popover?.sourceView = sender
+        popover?.sourceRect = sender.bounds
+
+        present(activityViewController, animated: true)
     }
 }
