@@ -68,7 +68,7 @@ class BirthdayViewController: UIViewController {
 
     @objc private func handleSwipeBackGesture(_ gesture: UIScreenEdgePanGestureRecognizer) {
         if gesture.state == .recognized {
-            navigationController?.popViewController(animated: true)
+            presenter.backTapped()
         }
     }
 }
